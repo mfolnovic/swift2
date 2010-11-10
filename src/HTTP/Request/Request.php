@@ -25,15 +25,18 @@ class Request {
 	public $get;
 	public $post;
 	public $cookies;
+	public $files;
+	public $server;
 
 	private $url;
 	private $code = 200;
 
-	public function __construct($get = array(), $post = array(), $cookies = array(), $files = array()) {
-		$this -> get = new Knapsack($get);
-		$this -> post = new Knapsack($post);
+	public function __construct($get = array(), $post = array(), $cookies = array(), $files = array(), $server = array()) {
+		$this -> get     = new Knapsack($get);
+		$this -> post    = new Knapsack($post);
 		$this -> cookies = new Knapsack($cookies);
-		$this -> files = new Knapsack($files);
+		$this -> files   = new Knapsack($files);
+		$this -> server  = new Knapsack($server);
 	}
 
 	public function getStatusCode() {
@@ -42,6 +45,15 @@ class Request {
 
 	public function setStatusCode($code) {
 		$this -> code = (int)$code;
+	}
+
+	public function getUrl() {
+		if(isset($server -> request_url)) {
+			return $server -> request_url;
+		} else {
+			/** Root */
+			return '/';
+		}
 	}
 }
 
