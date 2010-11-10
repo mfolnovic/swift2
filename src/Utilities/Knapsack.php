@@ -44,12 +44,12 @@ class Knapsack {
 		$this -> set($index, $value);
 	}
 
-	function isset($index) {
-		return isset($this- > knapsack[strtolower($index)]);
+	function exists($index) {
+		return isset($this -> knapsack[strtolower($index)]);
 	}
 
 	function __isset($index) {
-		return $this -> isset($index);
+		return $this -> exists($index);
 	}
 }
 
