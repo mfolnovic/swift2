@@ -9,6 +9,6 @@
          stopOnFailure="true"
          syntaxCheck="false"
          testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
-         verbose="true"
+         verbose="false"
          strict="true">
 </phpunit>
