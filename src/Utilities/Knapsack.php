@@ -43,6 +43,14 @@ class Knapsack {
 	function __set($index, $value) {
 		$this -> set($index, $value);
 	}
+
+	function isset($index) {
+		return isset($this- > knapsack[$index]);
+	}
+
+	function __isset($index) {
+		return $this -> isset($index);
+	}
 }
 
 ?>
