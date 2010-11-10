@@ -22,32 +22,86 @@ namespace Utilities;
  */
 
 class Knapsack {
+	/**
+	 * Knapsack's data is stored here
+	 */
 	var $knapsack = array();
 
+	/**
+	 * Constructor
+	 *
+	 * @access public
+	 * @param  array $data Knapsack's data
+	 * @return void
+	 */
 	function __construct($data = array()) {
 		$this -> knapsack = (array)$data;
 	}
 
+	/**
+	 * Gets element from knapsack with index $index
+	 *
+	 * @access public
+	 * @param  string $index Index from Knapsack
+	 * @return mixed
+	 */
 	function get($index) {
 		return $this -> knapsack[strtolower($index)];
 	}
 
+	/**
+	 * Magic method for get
+	 *
+	 * @access public
+	 * @param  string $index Index from Knapsack
+	 * @return mixed
+	 */
 	function __get($index) {
 		return $this -> get($index);
 	}
 
+	/**
+	 * Sets element in Knapsack with index $index to value $value
+	 *
+	 * @access public
+	 * @param  string $index Index from Knapsack
+	 * @param  mixed  $value New value for element with index $index in Knapsack
+	 * @return mixed
+	 */
 	function set($index, $value) {
 		return $this -> knapsack[strtolower($index)] = $value;
 	}
 
+	/**
+	 * Magic method for set
+	 *
+	 * @access public
+	 * @param  string $index Index from Knapsack
+	 * @param  mixed  $value New value for element with index $index in Knapsack
+	 * @return mixed
+	 */
 	function __set($index, $value) {
 		$this -> set($index, $value);
 	}
 
+	/**
+	 * Returns TRUE if element with index $index exists in Knapsack
+	 *
+	 * @access public
+	 * @param  string $index Index from Knapsack
+	 * @return mixed
+	 */
 	function exists($index) {
 		return isset($this -> knapsack[strtolower($index)]);
 	}
 
+	/**
+	 * Magic method for isset
+	 *
+	 * @access public
+	 * @param  string $index Index from Knapsack
+	 * @return mixed
+	 */
 	function __isset($index) {
 		return $this -> exists($index);
 	}
