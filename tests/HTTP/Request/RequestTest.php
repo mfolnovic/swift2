@@ -4,14 +4,13 @@
  * Temporary
  */
 
-namespace Swift\HTTP\Request;
-require "../../../src/HTTP/Request/Request.php";
+namespace HTTP\Request;
 
 class RequestTest extends \PHPUnit_Framework_TestCase {
 	public function testGet() {
 		$request = new Request(array('url' => 'home/'));
 
-		$this -> assertEquals($request -> get['url'], 'home/');
+		$this -> assertEquals($request -> get -> url, 'home/');
 	}
 
 	public function testStatusCode() {

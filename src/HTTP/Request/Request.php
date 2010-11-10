@@ -9,7 +9,9 @@
  * @package   Swift
  */
 
-namespace Swift\HTTP\Request;
+namespace HTTP\Request;
+
+use Utilities\Knapsack as Knapsack;
 
 /**
  * Request represents a HTTP request.
@@ -28,10 +30,10 @@ class Request {
 	private $code = 200;
 
 	public function __construct($get = array(), $post = array(), $cookies = array(), $files = array()) {
-		$this -> get = $get;
-		$this -> post = $post;
-		$this -> cookies = $cookies;
-		$this -> files = $files;
+		$this -> get = new Knapsack($get);
+		$this -> post = new Knapsack($post);
+		$this -> cookies = new Knapsack($cookies);
+		$this -> files = new Knapsack($files);
 	}
 
 	public function getStatusCode() {
