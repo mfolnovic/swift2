@@ -29,7 +29,7 @@ class Knapsack {
 	}
 
 	function get($index) {
-		return $this -> knapsack[$index];
+		return $this -> knapsack[strtolower($index)];
 	}
 
 	function __get($index) {
@@ -37,7 +37,7 @@ class Knapsack {
 	}
 
 	function set($index, $value) {
-		return $this -> knapsack[$index] = $value;
+		return $this -> knapsack[strtolower($index)] = $value;
 	}
 
 	function __set($index, $value) {
@@ -45,7 +45,7 @@ class Knapsack {
 	}
 
 	function isset($index) {
-		return isset($this- > knapsack[$index]);
+		return isset($this- > knapsack[strtolower($index)]);
 	}
 
 	function __isset($index) {
