@@ -35,7 +35,9 @@ class Knapsack {
 	 * @return void
 	 */
 	function __construct($data = array()) {
-		$this -> knapsack = (array)$data;
+		foreach((array)$data as $id => $value) {
+			$this -> knapsack[strtolower($id)] = $value;
+		}
 	}
 
 	/**
