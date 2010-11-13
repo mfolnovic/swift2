@@ -3,12 +3,27 @@
 namespace Utilities;
 
 class KnapsackTest extends \PHPUnit_Framework_TestCase {
-	function testConstructor() {
-		$knapsack = new Knapsack(array('foo' => 'bar', 'bar' => '123'));
+	var $knapsack;
 
-		$this -> assertEquals($knapsack -> foo, 'bar');
-		$this -> assertEquals($knapsack -> bar, '123');
-		$this -> assertFalse(isset($knapsack -> something));
+	function setUp() {
+		$this -> knapsack = new Knapsack(array('foo' => 'bar', 'bar' => '123'));
+	}
+
+	function testGet() {
+		$this -> assertEquals($this -> knapsack -> foo, 'bar');
+		$this -> assertEquals($this -> knapsack -> bar, '123');
+	}
+
+	function testIsset() {
+		$this -> assertFalse(isset($this -> knapsack -> something));
+	}
+
+	function testSet() {
+		$this -> knapsack -> something1 = 'foo';
+		$this -> knapsack -> set('SoMeThInG2', 'bar' );
+
+		$this -> assertEquals($this -> knapsack -> get('something1'), 'foo');
+		$this -> assertEquals($this -> knapsack -> something2, 'bar');
 	}
 }
 
