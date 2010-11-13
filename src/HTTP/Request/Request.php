@@ -95,8 +95,8 @@ class Request {
 	 * @return string
 	 */
 	public function getUrl() {
-		if(isset($server -> request_url)) {
-			return $server -> request_url;
+		if(isset($this -> server -> request_uri)) {
+			return $this -> server -> request_uri;
 		} else {
 			/** Root */
 			return '/';
