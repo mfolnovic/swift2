@@ -9,13 +9,43 @@
  * @package   Swift
  */
 
+namespace Loader;
+
+/**
+ * Loader class
+ *
+ * This class is used for loading all libraries, controllers etc.
+ * Also, it's used for autoloading
+ *
+ * @author     Matija Folnovic
+ * @package    Swift
+ * @subpackage Loader
+ */
+
 class Loader {
+	/**
+	 * Namespaces (type => directories)
+	 */
 	var $namespaces = array();
 
+	/**
+	 * Constructor
+	 * Registeres autoloader
+	 *
+	 * @access public
+	 * @return void
+	 */
 	function __construct() {
 		spl_autoload_register(array($this, 'load'));
 	}
 
+	/**
+	 * Used for loading classes
+	 *
+	 * @param string $type         Type (src,controller etc.)
+	 * @param string $library1,... Library
+	 * @return void
+	 */
 	function load() {
 		$libraries = func_get_args();
 		if(in_array(reset($libraries), $this -> namespaces)) {
@@ -33,12 +63,19 @@ class Loader {
 		}
 	}
 
-	public function addNamespace($type, $directory) {
-		if(!isset($this -> namespaces[$type])) {
-			$this -> namespaces[$type] = array();
+	/**
+	 * Adds directory $directory to namespace $namespace
+	 *
+	 * @access public
+	 * @param  string $name description
+	 * @return return
+	 */
+	public function addNamespace($namespace, $directory) {
+		if(!isset($this -> namespaces[$namespace])) {
+			$this -> namespaces[$namespace] = array();
 		}
 
-		$this -> namespaces[$type][] = realpath($directory);
+		$this -> namespaces[$namespace][] = realpath($directory);
 	}
 }
 
