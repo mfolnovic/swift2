@@ -1,6 +1,6 @@
 <?php
 
-namespace HTTP\Request;
+use HTTP\Request\Request;
 
 class RequestTest extends \PHPUnit_Framework_TestCase {
 	public function testGet() {
