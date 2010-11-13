@@ -42,11 +42,14 @@ class Request {
 	 * $_SERVER
 	 */
 	public $server;
-
 	/**
 	 * HTTP Status Code
 	 */
 	private $code = 200;
+	/**
+	 * Dispatcher instance
+	 */
+	private $dispatcher;
 
 	/**
 	 * Constructor
@@ -59,12 +62,12 @@ class Request {
 	 * @param  array $server  $_SERVER
 	 * @return void
 	 */
-	public function __construct($get = array(), $post = array(), $cookies = array(), $files = array(), $server = array()) {
-		$this -> get     = new Knapsack($get);
-		$this -> post    = new Knapsack($post);
-		$this -> cookies = new Knapsack($cookies);
-		$this -> files   = new Knapsack($files);
-		$this -> server  = new Knapsack($server);
+	public function __construct($get = null, $post = null, $cookies = null, $files = null, $server = null) {
+		$this -> get     = new Knapsack(empty($get) ? $_GET : $get);
+		$this -> post    = new Knapsack(empty($post) ? $_POST : $post);
+		$this -> cookies = new Knapsack(empty($cookies) ? $_COOKIE : $cookies);
+		$this -> files   = new Knapsack(empty($files) ? $_FILES : $files);
+		$this -> server  = new Knapsack(empty($server) ? $_SERVER : $server);
 	}
 
 	/**
@@ -101,6 +104,40 @@ class Request {
 			/** Root */
 			return '/';
 		}
+	}
+
+	/**
+	 * Separates real request url from $_SERVER's request url
+	 * 
+	 * E.g. request is http://localhost/your_project/hello/world
+	 * This method will get hello/world (if your project lies in www_root/your_project/)
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getRequestUrl() {
+		$url  = $this -> getUrl();
+		$self = $this -> server -> script_name;
+		$pos  = 0;
+		$n    = strlen($url) - 1;
+
+		while(isset($url[$pos]) && isset($self[$pos]) && $url[$pos] == $self[$pos]) {
+			++ $pos;
+		}
+
+		while($url[$n] == '/') $n --;
+		return substr($url, $pos, $n - $pos + 1);
+	}
+
+	/**
+	 * Get's dispatcher, and runs the route
+	 */
+	public function run() {
+		if($this -> dispatcher == NULL) {
+			$this -> dispatcher = new Dispatcher;
+		}
+
+		$this -> dispatcher -> run($this -> getRequestUrl());
 	}
 }
 
