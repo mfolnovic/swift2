@@ -9,6 +9,10 @@ class KnapsackTest extends \PHPUnit_Framework_TestCase {
 		$this -> knapsack = new Knapsack(array('foo' => 'bar', 'bar' => '123'));
 	}
 
+	function tearDown() {
+		unset($this -> knapsack);
+	}
+
 	function testGet() {
 		$this -> assertEquals($this -> knapsack -> foo, 'bar');
 		$this -> assertEquals($this -> knapsack -> bar, '123');
