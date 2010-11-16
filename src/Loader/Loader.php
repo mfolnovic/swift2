@@ -26,7 +26,7 @@ class Loader {
 	/**
 	 * Namespaces (type => directories)
 	 */
-	var $namespaces = array();
+	static $namespaces = array();
 
 	/**
 	 * Constructor
@@ -36,7 +36,6 @@ class Loader {
 	 * @return void
 	 */
 	function __construct() {
-		spl_autoload_register(array($this, 'load'));
 	}
 
 	/**
@@ -46,9 +45,9 @@ class Loader {
 	 * @param string $library1,... Library
 	 * @return void
 	 */
-	function load() {
+	public static function load() {
 		$libraries = func_get_args();
-		if(in_array(reset($libraries), $this -> namespaces)) {
+		if(isset(self::$namespaces[reset($libraries)])) {
 			$type      = array_shift($libraries);
 		} else {
 			$type = 'src';
@@ -56,7 +55,7 @@ class Loader {
 
 		foreach($libraries as $library) {
 			$library = strtr($library, '\\', '/');
-			foreach($this -> namespaces[$type] as $directory) {
+			foreach(self::$namespaces[$type] as $directory) {
 				$dir = $directory . '/' . $library . '.php';
 				include $dir;
 			}
@@ -71,12 +70,14 @@ class Loader {
 	 * @return return
 	 */
 	public function addNamespace($namespace, $directory) {
-		if(!isset($this -> namespaces[$namespace])) {
-			$this -> namespaces[$namespace] = array();
+		if(!isset(self::$namespaces[$namespace])) {
+			self::$namespaces[$namespace] = array();
 		}
 
-		$this -> namespaces[$namespace][] = realpath($directory);
+		self::$namespaces[$namespace][] = realpath($directory);
 	}
 }
+
+spl_autoload_register('Loader\Loader::load');
 
 ?>
