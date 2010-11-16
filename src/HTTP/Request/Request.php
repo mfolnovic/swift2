@@ -12,6 +12,7 @@
 namespace HTTP\Request;
 
 use Utilities\Knapsack as Knapsack;
+use HTTP\Router\Router as Router;
 
 /**
  * Request represents a HTTP request.
@@ -49,7 +50,7 @@ class Request {
 	/**
 	 * Dispatcher instance
 	 */
-	private $dispatcher;
+	private $router;
 
 	/**
 	 * Constructor
@@ -133,11 +134,12 @@ class Request {
 	 * Get's dispatcher, and runs the route
 	 */
 	public function run() {
-		if($this -> dispatcher == NULL) {
-			$this -> dispatcher = new Dispatcher;
+		if($this -> router == NULL) {
+			$this -> router = new Router;
 		}
 
-		$this -> dispatcher -> run($this -> getRequestUrl());
+		$data = $this -> router -> run($this -> getRequestUrl());
+		$this -> get -> knapsack = array_merge($this -> get -> knapsack, $data);
 	}
 }
 
