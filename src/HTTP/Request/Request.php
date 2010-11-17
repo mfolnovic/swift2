@@ -69,6 +69,10 @@ class Request {
 		$this -> cookies = new Knapsack(empty($cookies) ? $_COOKIE : $cookies);
 		$this -> files   = new Knapsack(empty($files) ? $_FILES : $files);
 		$this -> server  = new Knapsack(empty($server) ? $_SERVER : $server);
+
+		$router = new Router;
+		$data = $router -> run($this -> getRequestUrl());
+		$this -> get -> knapsack = array_merge($this -> get -> knapsack, $data);
 	}
 
 	/**
@@ -128,18 +132,6 @@ class Request {
 
 		while($url[$n] == '/') $n --;
 		return substr($url, $pos, $n - $pos + 1);
-	}
-
-	/**
-	 * Get's dispatcher, and runs the route
-	 */
-	public function run() {
-		if($this -> router == NULL) {
-			$this -> router = new Router;
-		}
-
-		$data = $this -> router -> run($this -> getRequestUrl());
-		$this -> get -> knapsack = array_merge($this -> get -> knapsack, $data);
 	}
 }
 
