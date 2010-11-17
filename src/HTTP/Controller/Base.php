@@ -44,6 +44,26 @@ class Base {
 		$this -> request  = $request;
 		$this -> response = $response;
 	}
+
+	/**
+	 * Shortcut function to get controller name of current request
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function controller_name() {
+		return $this -> request -> get -> controller;
+	}
+
+	/**
+	 * Shortcut function to get action name of current request
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function action_name() {
+		return $this -> request -> get -> action;
+	}
 }
 
 ?>
