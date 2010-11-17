@@ -24,7 +24,17 @@ use Loader\Loader;
  */
 
 class Controller {
-	function __construct(Request &$request, Response &$response) {
+	/**
+	 * Constructor
+	 * Get's controller and action name from $request, prepares arguments,
+	 * create new instance of app's controller and calls specific method.
+	 *
+	 * @access public
+	 * @param  object $request  Instance of Request
+	 * @param  object $response Instance of Response
+	 * @return void
+	 */
+	public function __construct(Request &$request, Response &$response) {
 		$controller = $request -> get -> controller;
 		$action     = $request -> get -> action;
 
@@ -38,8 +48,26 @@ class Controller {
 		call_user_func_array(array($class_name, $action), $arguments);
 	}
 
-	public function prepareArguments($instance, $action, &$request, &$response) {
-		$reflection = new \ReflectionMethod($instance, $action);
+	/**
+	 * Takes argument list of method $method from class instance $instance
+	 * and creates array which would be perfect to call that method with.
+	 * e.g. let's say we have method (in class UsersController):
+	 * function edit($id, $user, $request, $response)
+	 * and let's say we request it with:
+	 * /users/show/1
+	 * $id would get value 1, $user would be index 'user' from $_POST
+	 * $request would be instance of Request, and $response would be
+	 * instance of Response
+	 *
+	 * @access public
+	 * @param  object $instance Instance
+	 * @param  string $method   Method name
+	 * @param  object $request  Instance of Request
+	 * @param  object $response Instance of Response
+	 * @return array
+	 */
+	public function prepareArguments($instance, $method, &$request, &$response) {
+		$reflection = new \ReflectionMethod($instance, $method);
 		$params     = $reflection -> getParameters();
 		$return     = array();
 

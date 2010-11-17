@@ -23,9 +23,23 @@ use HTTP\Response\Response;
  */
 
 class Base {
+	/**
+	 * Request instance
+	 */
 	var $request;
+	/**
+	 * Response instance
+	 */
 	var $response;
 
+	/**
+	 * Constructor
+	 *
+	 * @access public
+	 * @param  object $request  Request instance
+	 * @param  object $response Response instance
+	 * @return return
+	 */
 	function __construct(Request $request, Response $response) {
 		$this -> request  = $request;
 		$this -> response = $response;
