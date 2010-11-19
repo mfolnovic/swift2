@@ -9,7 +9,7 @@
  * @package   Swift
  */
 
-namespace HTTP\Router;
+namespace Swift\HTTP\Router;
 
 /**
  * This class represents one route, and is used for compiling it

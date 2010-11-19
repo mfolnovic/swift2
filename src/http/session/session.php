@@ -9,9 +9,7 @@
  * @package   Swift
  */
 
-namespace HTTP\Session;
-
-use HTTP\Session\Adapters;
+namespace Swift\HTTP\Session;
 
 /**
  * This class is used for manipulating sessions

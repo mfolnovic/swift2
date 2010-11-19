@@ -9,10 +9,10 @@
  * @package   Swift
  */
 
-namespace HTTP\Controller;
+namespace Swift\HTTP\Controller;
 
-use HTTP\Request\Request;
-use HTTP\Response\Response;
+use Swift\HTTP\Request\Request;
+use Swift\HTTP\Response\Response;
 
 /**
  * This is base controller which is inherited by all other controllers

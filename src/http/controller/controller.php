@@ -9,11 +9,11 @@
  * @package   Swift
  */
 
-namespace HTTP\Controller;
+namespace Swift\HTTP\Controller;
 
-use HTTP\Request\Request;
-use HTTP\Response\Response;
-use Loader\Loader;
+use Swift\HTTP\Request\Request;
+use Swift\HTTP\Response\Response;
+use Swift\Loader\Loader;
 
 /**
  * Controller class is used for running controllers (part of MVC)
@@ -38,10 +38,8 @@ class Controller {
 		$controller = $request -> get -> controller;
 		$action     = $request -> get -> action;
 
-		$class_name = ucfirst($controller) . 'Controller';
-		Loader::load('controller', $class_name);
-
-		$class_name = 'Application\\Controllers\\' . $class_name;
+		$class_name = 'Application\\Controllers\\' . ucfirst($controller) . 'Controller';
+		Loader::load($class_name);
 		$instance = new $class_name($request, $response);
 
 		$arguments = $this -> prepareArguments($instance, $action, $request, $response);

@@ -9,7 +9,7 @@
  * @package   Swift
  */
 
-namespace HTTP\Router;
+namespace Swift\HTTP\Router;
 
 /**
  * This class is used for routing urls to right controllers.

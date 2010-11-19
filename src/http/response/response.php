@@ -9,7 +9,7 @@
  * @package   Swift
  */
 
-namespace HTTP\Response;
+namespace Swift\HTTP\Response;
 
 class Response {
 	function __construct() {

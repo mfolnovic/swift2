@@ -9,7 +9,7 @@
  * @package   Swift
  */
 
-namespace Utilities;
+namespace Swift\Utilities;
 
 /**
  * Knapsack

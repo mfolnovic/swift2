@@ -2,13 +2,13 @@
 
 define("APP_DIR", __DIR__ . '/app/');
 
-include './src/Loader/Loader.php';
+include './src/loader/loader.php';
 
-Loader\Loader::addNamespace('src', __DIR__ . '/src/');
-Loader\Loader::addNamespace('controller', __DIR__ . '/app/controllers/');
+Swift\Loader\Loader::addNamespace('Swift', __DIR__ . '/src/');
+Swift\Loader\Loader::addNamespace('Application', __DIR__ . '/app/');
 
-$request = new HTTP\Request\Request;
-$response = new HTTP\Response\Response;
-$controller = new HTTP\Controller\Controller($request, $response);
+$request = new Swift\HTTP\Request\Request;
+$response = new Swift\HTTP\Response\Response;
+$controller = new Swift\HTTP\Controller\Controller($request, $response);
 
 ?>

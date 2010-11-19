@@ -9,9 +9,9 @@
  * @package   Swift
  */
 
-namespace HTTP\Cookies;
+namespace Swift\HTTP\Cookies;
 
-use Utilities\Knapsack;
+use Swift\Utilities\Knapsack;
 
 /**
  * This class is used for handling cookies

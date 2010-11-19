@@ -9,12 +9,12 @@
  * @package   Swift
  */
 
-namespace HTTP\Request;
+namespace Swift\HTTP\Request;
 
-use Utilities\Knapsack as Knapsack;
-use HTTP\Router\Router as Router;
-use HTTP\Cookies\Cookies as Cookies;
-use HTTP\Session\Session as Session;
+use Swift\Utilities\Knapsack as Knapsack;
+use Swift\HTTP\Router\Router as Router;
+use Swift\HTTP\Cookies\Cookies as Cookies;
+use Swift\HTTP\Session\Session as Session;
 
 /**
  * Request represents a HTTP request.

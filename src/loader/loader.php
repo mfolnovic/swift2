@@ -9,7 +9,7 @@
  * @package   Swift
  */
 
-namespace Loader;
+namespace Swift\Loader;
 
 /**
  * Loader class
@@ -47,15 +47,12 @@ class Loader {
 	 */
 	public static function load() {
 		$libraries = func_get_args();
-		if(isset(self::$namespaces[reset($libraries)])) {
-			$type      = array_shift($libraries);
-		} else {
-			$type = 'src';
-		}
-
 		foreach($libraries as $library) {
-			$library = strtr($library, '\\', '/');
-			foreach(self::$namespaces[$type] as $directory) {
+			$pos       = strpos($library, '\\');
+			$namespace = substr($library, 0, $pos);
+			$library   = strtolower(preg_replace('/(?<=[a-z])([A-Z])/', '_$1', strtr(substr($library, $pos + 1), '\\', '/')));
+
+			foreach(self::$namespaces[$namespace] as $directory) {
 				$dir = $directory . '/' . $library . '.php';
 				include $dir;
 			}
@@ -78,6 +75,6 @@ class Loader {
 	}
 }
 
-spl_autoload_register('Loader\Loader::load');
+spl_autoload_register('Swift\Loader\Loader::load');
 
 ?>
