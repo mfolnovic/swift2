@@ -1,6 +1,6 @@
 <?php
 
-use HTTP\Session\Session;
+use Swift\HTTP\Session\Session;
 
 class SessionTest extends \PHPUnit_Framework_TestCase {
 	var $session;

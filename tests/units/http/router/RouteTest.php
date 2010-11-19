@@ -1,6 +1,6 @@
 <?php
 
-use HTTP\Router\Route as Route;
+use Swift\HTTP\Router\Route;
 
 class RouteTest extends \PHPUnit_Framework_TestCase {
 	function testCompile() {

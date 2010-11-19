@@ -1,6 +1,6 @@
 <?php
 
-use HTTP\Router\Router;
+use Swift\HTTP\Router\Router;
 
 class RouterTest extends \PHPUnit_Framework_TestCase {
 	var $router;

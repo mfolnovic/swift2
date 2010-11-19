@@ -3,9 +3,9 @@
 define('SRC_DIR', realpath(__DIR__ . '/../src') . '/'); 
 define('APP_DIR', realpath(__DIR__ . '/fixtures/') . '/');
 
-include SRC_DIR . 'Loader/Loader.php';
+include SRC_DIR . 'loader/loader.php';
 
-$loader = new Loader\Loader;
-$loader -> addNamespace('src', SRC_DIR);
+$loader = new Swift\Loader\Loader;
+$loader -> addNamespace('Swift', SRC_DIR);
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-use Utilities\Knapsack;
+use Swift\Utilities\Knapsack;
 
 class KnapsackTest extends \PHPUnit_Framework_TestCase {
 	var $knapsack;

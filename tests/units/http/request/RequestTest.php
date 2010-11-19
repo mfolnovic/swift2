@@ -1,6 +1,6 @@
 <?php
 
-use HTTP\Request\Request;
+use Swift\HTTP\Request\Request;
 
 class RequestTest extends \PHPUnit_Framework_TestCase {
 	public function testGet() {

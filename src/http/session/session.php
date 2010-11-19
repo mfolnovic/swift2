@@ -76,7 +76,7 @@ class Session {
 	 * @return void
 	 */
 	public function start() {
-		$type            = 'HTTP\Session\Adapters\\' . ucfirst($this -> options['type']);
+		$type            = 'Swift\HTTP\Session\Adapters\\' . ucfirst($this -> options['type']);
 		$this -> storage = new $type($this -> options);
 	}
 
