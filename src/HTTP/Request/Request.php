@@ -129,7 +129,7 @@ class Request {
 			++ $pos;
 		}
 
-		while($url[$n] == '/') $n --;
+		while($url[$n] == '/' && $n > 0) $n --;
 		return substr($url, $pos, $n - $pos + 1);
 	}
 }

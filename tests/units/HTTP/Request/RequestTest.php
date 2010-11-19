@@ -22,7 +22,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetUrl() {
-		$request = new Request(null, null, null, null, array('REQUEST_URI' => '/index.php'));
+		$request = new Request(null, null, null, null, array('REQUEST_URI' => '/index.php', 'SCRIPT_NAME' => 'index.php'));
 
 		$this -> assertEquals($request -> getUrl(), '/index.php');
 

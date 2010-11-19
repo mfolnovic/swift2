@@ -1,6 +1,7 @@
 <?php
 
 define('SRC_DIR', realpath(__DIR__ . '/../src') . '/'); 
+define('APP_DIR', realpath(__DIR__ . '/fixtures/') . '/');
 
 include SRC_DIR . 'Loader/Loader.php';
 

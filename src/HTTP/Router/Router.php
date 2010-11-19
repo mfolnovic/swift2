@@ -20,9 +20,22 @@ namespace HTTP\Router;
  */
 
 class Router {
+	/**
+	 * Collection of routes
+	 */
 	var $routes        = array();
+	/**
+	 * Content of routes.yml
+	 */
 	var $configuration = array();
 
+	/**
+	 * Goes through all routes and tries to match each route to $url
+	 *
+	 * @access public
+	 * @param  string $url Url
+	 * @return array
+	 */
 	public function run($url) {
 		$this -> loadRoutes();
 
@@ -40,6 +53,16 @@ class Router {
 		return array();
 	}
 
+	/**
+	 * Matches route and current url using compiled route
+	 *
+	 * @access public
+	 * @param  array  $route  Route
+	 * @param  string $url    Current URL
+	 * @param  array  $params Params taken from the route
+	 * @param  int    $taken  Number of characters taken from the $url
+	 * @return array
+	 */
 	public function matchRoute($route, $url, &$params, $taken = 0) {
 		if($taken == strlen($url)) {
 			return 0;
@@ -73,6 +96,14 @@ class Router {
 		return $return;
 	}
 
+	/**
+	 * Loades route from path $path.
+	 * If $path is not specified, it'll load from app/config/routes.yml
+	 *
+	 * @access public
+	 * @param  string $path Path from where it should load.
+	 * @return void
+	 */
 	public function loadRoutes($path = '') {
 		if(!empty($this -> routes)) {
 			return;

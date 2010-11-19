@@ -61,6 +61,10 @@ class Session {
 			return;
 		}
 
+		if(empty($this -> storage)) {
+			$this -> start();
+		}
+
 		$this -> storage -> write(array(
 																		'_session' => &$this -> properties,
 		));

@@ -10,13 +10,11 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	function testLoadRoutes() {
-		$this -> router -> loadRoutes(__DIR__ . '/fixtures/routes.yml');
+		$this -> router -> loadRoutes();
 		$this -> assertTrue(isset($this -> router -> routes['default']));
-		var_dump($this -> router -> routes);
 	}
 
 	function testMatchRoute() {
-		$this -> router -> loadRoutes(__DIR__ . '/fixtures/routes.yml');
 		$return = $this -> router -> run('hello');
 		$this -> assertEquals($return, array('controller' => 'hello', 'action' => 'index'));
 	}
