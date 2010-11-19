@@ -42,9 +42,10 @@ class Session {
 	 * @access public
 	 * @param  string $options Options
 	 * @return void
+	 * @todo   Import current session data
 	 */
-	public function __construct($options) {
-		$this -> options = $options;
+	public function __construct($options = array()) {
+		$this -> options = array_merge(array('type' => 'native'), $options);
 	}
 
 	/**
@@ -56,8 +57,8 @@ class Session {
 	 * @return mixed
 	 */
 	public function __destruct() {
-		if(empty($this -> storage)) {
-			$this -> start();
+		if(empty($this -> properties)) {
+			return;
 		}
 
 		$this -> storage -> write(array(
