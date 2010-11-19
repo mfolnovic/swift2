@@ -13,6 +13,7 @@ namespace HTTP\Request;
 
 use Utilities\Knapsack as Knapsack;
 use HTTP\Router\Router as Router;
+use HTTP\Cookies\Cookies as Cookies;
 
 /**
  * Request represents a HTTP request.
@@ -47,10 +48,6 @@ class Request {
 	 * HTTP Status Code
 	 */
 	private $code = 200;
-	/**
-	 * Dispatcher instance
-	 */
-	private $router;
 
 	/**
 	 * Constructor
@@ -66,7 +63,7 @@ class Request {
 	public function __construct($get = null, $post = null, $cookies = null, $files = null, $server = null) {
 		$this -> get     = new Knapsack(empty($get) ? $_GET : $get);
 		$this -> post    = new Knapsack(empty($post) ? $_POST : $post);
-		$this -> cookies = new Knapsack(empty($cookies) ? $_COOKIE : $cookies);
+		$this -> cookies = new Cookies();
 		$this -> files   = new Knapsack(empty($files) ? $_FILES : $files);
 		$this -> server  = new Knapsack(empty($server) ? $_SERVER : $server);
 
