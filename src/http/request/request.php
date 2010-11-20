@@ -96,6 +96,16 @@ class Request {
 	}
 
 	/**
+	 * Returns request method, e.g. GET, POST, DELETE, PUT
+	 * @access public
+	 * @param  string $name description
+	 * @return return
+	 */
+	public function getMethod() {
+		return strtoupper($this -> get -> method) ?: $this -> server -> request_method;
+	}
+
+	/**
 	 * Returns Request's URL
 	 *
 	 * @access public
@@ -124,7 +134,7 @@ class Request {
 		if(empty($url)) return '/';
 		$self = $this -> server -> script_name;
 		$pos  = 0;
-		$n    = strlen($url) - 1;
+		$n    = (strpos($url, '?') ?: strlen($url)) - 1;
 
 		while(isset($url[$pos]) && isset($self[$pos]) && $url[$pos] == $self[$pos]) {
 			++ $pos;

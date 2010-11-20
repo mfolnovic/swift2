@@ -7,6 +7,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
 		$request = new Request(array('url' => 'home/'));
 
 		$this -> assertEquals($request -> get -> url, 'home/');
+
+		$request = new Request(array(), array('user' => array('username' => 'test', 'password' => 'simple'), 'sth' => 'something'));
+
+		$this -> assertEquals($request -> post -> user, array('username' => 'test', 'password' => 'simple'));
+		$this -> assertEquals($request -> post -> sth, 'something');
 	}
 
 	public function testStatusCode() {
@@ -19,6 +24,17 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
 
 		$request -> setStatusCode('500');
 		$this -> assertEquals($request -> getStatusCode(), 500);
+	}
+
+	public function testRequestMethod() {
+		$request = new Request(null, null, null, null, array('REQUEST_METHOD' => 'GET'));
+
+		$this -> assertEquals($request -> getMethod(), 'GET');
+
+		$request = new Request(array('method' => 'put'), null, null, null, array('REQUEST_METHOD' => 'GET'));
+
+		$this -> assertEquals($request -> getMethod(), 'PUT');
+
 	}
 
 	public function testGetUrl() {

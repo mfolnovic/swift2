@@ -48,7 +48,7 @@ class Knapsack {
 	 * @return mixed
 	 */
 	function get($index) {
-		return $this -> knapsack[strtolower($index)];
+		return $this -> exists($index) ? $this -> knapsack[strtolower($index)] : null;
 	}
 
 	/**
