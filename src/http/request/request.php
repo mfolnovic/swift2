@@ -97,12 +97,23 @@ class Request {
 
 	/**
 	 * Returns request method, e.g. GET, POST, DELETE, PUT
+	 *
 	 * @access public
-	 * @param  string $name description
-	 * @return return
+	 * @return string
 	 */
 	public function getMethod() {
 		return strtoupper($this -> get -> method) ?: $this -> server -> request_method;
+	}
+
+	/**
+	 * Redirection
+	 *
+	 * @access public
+	 * @param  string $url Redirect to $url
+	 * @return void
+	 */
+	public function redirectTo($url) {
+		header("Location: $url");
 	}
 
 	/**

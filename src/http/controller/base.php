@@ -64,6 +64,17 @@ class Base {
 	public function action_name() {
 		return $this -> request -> get -> action;
 	}
+
+	/**
+	 * Shortcut function to redirect
+	 *
+	 * @access public
+	 * @param  string $url Redirect to $url
+	 * @return void
+	 */
+	public function redirect_to($url) {
+		$this -> request -> redirectTo($url);
+	}
 }
 
 ?>
