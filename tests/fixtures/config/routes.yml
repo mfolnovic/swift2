@@ -1,5 +1,5 @@
 default:
   pattern: :controller(/:action(/:id))(.:format)
   default:
-    controller: welcome
-    action: index
+    controller: foo
+    action: bar

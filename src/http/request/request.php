@@ -62,10 +62,10 @@ class Request {
 	 * @return void
 	 */
 	public function __construct($get = null, $post = null, $cookies = null, $files = null, $server = null) {
-		$this -> get     = new Knapsack(empty($get) ? $_GET : $get);
-		$this -> post    = new Knapsack(empty($post) ? $_POST : $post);
-		$this -> files   = new Knapsack(empty($files) ? $_FILES : $files);
-		$this -> server  = new Knapsack(empty($server) ? $_SERVER : $server);
+		$this -> get     = new Knapsack($get === null ? $_GET : $get);
+		$this -> post    = new Knapsack($post === null ? $_POST : $post);
+		$this -> files   = new Knapsack($files === null ? $_FILES : $files);
+		$this -> server  = new Knapsack($server === null ? $_SERVER : $server);
 		$this -> cookies = new Cookies();
 		$this -> session = new Session();
 
@@ -121,6 +121,7 @@ class Request {
 	 */
 	public function getRequestUrl() {
 		$url  = $this -> getUrl();
+		if(empty($url)) return '/';
 		$self = $this -> server -> script_name;
 		$pos  = 0;
 		$n    = strlen($url) - 1;
@@ -129,8 +130,8 @@ class Request {
 			++ $pos;
 		}
 
-		while($url[$n] == '/' && $n > 0) $n --;
-		return substr($url, $pos, $n - $pos + 1);
+		while($url[$n] == '/' && $n > $pos) $n --;
+		return substr($url, $pos, $n - $pos + 1) ?: '/';
 	}
 }
 

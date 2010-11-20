@@ -14,9 +14,29 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
 		$this -> assertTrue(isset($this -> router -> routes['default']));
 	}
 
-	function testMatchRoute() {
-		$return = $this -> router -> run('hello');
-		$this -> assertEquals($return, array('controller' => 'hello', 'action' => 'index'));
+	/**
+	 * @dataProvider GetMatchRouteProvider
+	 */
+	public function testMatchRouter($url, $match) {
+		$return = $this -> router  -> run($url);
+
+		$this -> assertEquals($return, $match);
+	}
+
+	/**
+	 * @codeCoverageIgnore
+	 */
+	public function GetMatchRouteProvider() {
+		return array(
+			array('/', array('controller' => 'foo', 'action' => 'bar')),
+			array('hello', array('controller' => 'hello', 'action' => 'bar')),
+			array('hello/world', array('controller' => 'hello', 'action' => 'world')),
+			array('hello/world/1', array('controller' => 'hello', 'action' => 'world', 'id' => 1)),
+			array('hello/world/1.xml', array('controller' => 'hello', 'action' => 'world', 'id' => 1, 'format' => 'xml')),
+			array('bar', array('controller' => 'bar', 'action' => 'bar')),
+			array('bar.json', array('controller' => 'bar', 'action' => 'bar', 'format' => 'json')),
+			array('bar/show.rss', array('controller' => 'bar', 'action' => 'show', 'format' => 'rss')),
+		);
 	}
 }
 
