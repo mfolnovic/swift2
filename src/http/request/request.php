@@ -62,12 +62,21 @@ class Request {
 	 * @return void
 	 */
 	public function __construct($get = null, $post = null, $cookies = null, $files = null, $server = null) {
-		$this -> get     = new Knapsack($get === null ? $_GET : $get);
-		$this -> post    = new Knapsack($post === null ? $_POST : $post);
-		$this -> files   = new Knapsack($files === null ? $_FILES : $files);
-		$this -> server  = new Knapsack($server === null ? $_SERVER : $server);
+		$this -> get     = new Knapsack($get ?: $_GET);
+		$this -> post    = new Knapsack($post ?: $_POST);
+		$this -> files   = new Knapsack($files ?: $_FILES);
+		$this -> server  = new Knapsack($server ?: $_SERVER);
 		$this -> cookies = new Cookies();
 		$this -> session = new Session();
+
+		$headers = array();
+		foreach($this -> server -> knapsack as $index => $value) {
+			if(substr($index, 0, 5) === 'HTTP_') {
+				$headers[substr($index, 5)] = $value;
+			}
+		}
+
+		$this -> headers = new Knapsack($headers);
 
 		$router = new Router;
 		$data = $router -> run($this -> getRequestUrl());
