@@ -40,7 +40,9 @@ class Haml {
 		$lexer    = new Lexer();
 		$parsed   = $lexer -> parse($content);
 		$compiler = new Compiler($parsed, $compile);
-		$this -> instance = new $compiler -> hash;
+
+		$name = "\Application\Helpers\\" . $compiler -> hash;
+		$this -> instance = new $name;
 	}
 
 	public function run($data) {
