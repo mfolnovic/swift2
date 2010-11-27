@@ -87,14 +87,47 @@ class Base {
 		$this -> response -> template = $template;
 	}
 
+	/**
+	 * Sets layout to $layout
+	 *
+	 * @access public
+	 * @param  string $layout New layout
+	 * @return void
+	 */
+	public function FunctionName($layout) {
+		$this -> response -> layout = $layout;
+	}
+
+	/**
+	 * Get controller property with index $index
+	 *
+	 * @access public
+	 * @param  string $index Index
+	 * @return mixed
+	 */
 	public function &__get($index) {
 		return isset($this -> request -> controller_data[$index]) ? $this -> request -> controller_data[$index] : NULL;
 	}
 
+	/**
+	 * Set controller property with index $index to value $value
+	 *
+	 * @access public
+	 * @param  string $index Index
+	 * @param  string $value New value
+	 * @return void
+	 */
 	public function __set($index, $value) {
 		$this -> request -> controller_data[$index] = $value;
 	}
 
+	/**
+	 * Test if controller property with index $index exists
+	 *
+	 * @access public
+	 * @param  string $index Index
+	 * @return bool
+	 */
 	public function __isset($index) {
 		return isset($this -> request -> controller_data[$index]);
 	}
