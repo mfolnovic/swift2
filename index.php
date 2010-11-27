@@ -7,8 +7,13 @@ include './src/loader/loader.php';
 Swift\Loader\Loader::addNamespace('Swift', __DIR__ . '/src/');
 Swift\Loader\Loader::addNamespace('Application', __DIR__ . '/app/');
 
+/*$haml = new Swift\Haml\Haml(APP_DIR . 'views/layouts/application.haml');
+exit;*/
+
 $request = new Swift\HTTP\Request\Request;
 $response = new Swift\HTTP\Response\Response;
 $controller = new Swift\HTTP\Controller\Controller($request, $response);
+
+$response -> renderLayout($request -> controller_data);
 
 ?>
