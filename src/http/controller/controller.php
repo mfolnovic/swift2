@@ -38,12 +38,16 @@ class Controller {
 		$controller = $request -> get -> controller;
 		$action     = $request -> get -> action;
 
+		$response -> template = $controller . '/' . $action;
+
 		$class_name = 'Application\\Controllers\\' . ucfirst($controller) . 'Controller';
 		Loader::load($class_name);
 		$instance = new $class_name($request, $response);
 
 		$arguments = $this -> prepareArguments($instance, $action, $request, $response);
-		call_user_func_array(array($class_name, $action), $arguments);
+		call_user_func_array(array($instance, $action), $arguments);
+
+		$response -> render($request -> controller_data);
 	}
 
 	/**

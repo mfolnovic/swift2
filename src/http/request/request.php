@@ -45,6 +45,7 @@ class Request {
 	 * $_SERVER
 	 */
 	public $server;
+	public $controller_data = array();
 	/**
 	 * HTTP Status Code
 	 */

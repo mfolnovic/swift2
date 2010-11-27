@@ -26,11 +26,11 @@ class Base {
 	/**
 	 * Request instance
 	 */
-	var $request;
+	private $request;
 	/**
 	 * Response instance
 	 */
-	var $response;
+	private $response;
 
 	/**
 	 * Constructor
@@ -74,6 +74,29 @@ class Base {
 	 */
 	public function redirect_to($url) {
 		$this -> request -> redirectTo($url);
+	}
+
+	/**
+	 * Sets template which should be rendered to $template
+	 *
+	 * @access public
+	 * @param  string $template New template to render
+	 * @return return
+	 */
+	public function render($template) {
+		$this -> response -> template = $template;
+	}
+
+	public function &__get($index) {
+		return isset($this -> request -> controller_data[$index]) ? $this -> request -> controller_data[$index] : NULL;
+	}
+
+	public function __set($index, $value) {
+		$this -> request -> controller_data[$index] = $value;
+	}
+
+	public function __isset($index) {
+		return isset($this -> request -> controller_data[$index]);
 	}
 }
 
