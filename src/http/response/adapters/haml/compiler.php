@@ -17,8 +17,8 @@ class Compiler {
 	public $hash;
 
 	function __construct(State $tree, $path) {
-		$this -> hash = 'Haml_Template_' . substr(md5($path), 0, 6);
-		$content      = "<?php\nnamespace Application\Helpers;\nclass {$this -> hash} {\n\tfunction display(\$data) {\n";
+		$this -> hash = substr(preg_replace("/[0-9]/", '', md5($path)), 0, 6);
+		$content      = "<?php\nnamespace Application\Templates;\nclass {$this -> hash}{\n\tfunction display(\$data) {\n";
 
 		$content .= $this -> compile($tree, "\t\t");
 

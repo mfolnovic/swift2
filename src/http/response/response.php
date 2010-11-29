@@ -12,24 +12,40 @@
 namespace Swift\HTTP\Response;
 
 class Response {
+	/**
+	 * Current template to render
+	 */
 	var $template;
-	var $layout = 'application';
+	/**
+	 * Current layout
+	 */
+	var $layout  = 'application';
+	var $storage = array();
 
+	/**
+	 * Constructor
+	 *
+	 * @access public
+	 * @return void
+	 */
 	function __construct() {
 		$this -> loadHelpers(APP_DIR . 'helpers/', __DIR__ . '/helpers/');
 	}
 
-	public function runTemplate($template, $data = array()) {
+	public function &runTemplate($template, &$data, $name) {
+		ob_start();
 		$object   = new Adapters\Haml\Haml(APP_DIR . 'views/' . $template . '.haml', APP_DIR . 'tmp/views/' . $template . '.php');
 		$object -> run($data);
+		$this -> storage[$name] = ob_get_clean();
+		return $this -> storage[$name];
 	}
 
-	public function render($data) {
-		$this -> runTemplate($this -> template, $data);
+	public function render(&$data) {
+		$this -> runTemplate($this -> template, $data, 'template');
 	}
 
-	public function renderLayout($data) {
-		$this -> runTemplate('layouts/' . $this -> layout, $data);
+	public function renderLayout(&$data) {
+		echo $this -> runTemplate('layouts/' . $this -> layout, $data, 'layout');
 	}
 
 	/**

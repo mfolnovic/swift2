@@ -41,7 +41,7 @@ class Haml {
 		$parsed   = $lexer -> parse($content);
 		$compiler = new Compiler($parsed, $compile);
 
-		$name = "\Application\Helpers\\" . $compiler -> hash;
+		$name = "\Application\Templates\\" . $compiler -> hash;
 		$this -> instance = new $name;
 	}
 
