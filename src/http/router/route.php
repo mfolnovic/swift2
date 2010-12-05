@@ -48,9 +48,10 @@ class Route {
 	 * @return array
 	 */
 	public function &compile() {
+		$compiled =& $this -> compiled;
+
 		if(empty($this -> compiled)) {
 			$path     =  $this -> route['pattern'];
-			$compiled =& $this -> compiled;
 
 			preg_match_all("/[(]|[)]|[^\(\)]+/", $path, $parts);
 			foreach($parts[0] as $part) {

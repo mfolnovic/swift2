@@ -42,9 +42,9 @@ class Router {
 		foreach($this -> routes as &$route) {
 			$compiled = $route -> compile();
 			$params   = array();
-			$matched  = $this -> matchRoute($compiled, $url, $params) > 0;
+			$matched  = $this -> matchRoute($compiled, $url, $params);
 
-			if($matched) {
+			if($matched && $this -> checkConstraints($compiled, $params)) {
 				$params += $route -> route['default'];
 				return $params;
 			}
@@ -94,6 +94,26 @@ class Router {
 		}
 
 		return $return;
+	}
+
+	/**
+	 * This function goes through constraints and checks if everything is ok
+	 *
+	 * @access public
+	 * @param  array $route   Route
+	 * @param  array $matched Matched URL
+	 * @return bool
+	 */
+	public function checkConstraints($route, $params) {
+		if(isset($route['constraints'])) {
+			foreach($route['constraints'] as $key => $regex) {
+				if(!preg_match($regex, $params[$key])) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	/**

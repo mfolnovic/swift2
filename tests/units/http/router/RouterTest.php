@@ -36,6 +36,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
 			array('bar', array('controller' => 'bar', 'action' => 'bar')),
 			array('bar.json', array('controller' => 'bar', 'action' => 'bar', 'format' => 'json')),
 			array('bar/show.rss', array('controller' => 'bar', 'action' => 'show', 'format' => 'rss')),
+			array('archive/2009/11', array('controller' => 'archive', 'action' => 'index', 'month' => '11', 'year' => '2009'))
 		);
 	}
 }
