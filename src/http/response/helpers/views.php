@@ -1,6 +1,8 @@
 <?php
 
-function yield($template) {
+function yield($template = 'template') {
+	global $response; // temporary hack
+	return $response -> storage[$template];
 }
 
 ?>

@@ -22,20 +22,11 @@ class Response {
 	var $layout  = 'application';
 	var $storage = array();
 
-	/**
-	 * Constructor
-	 *
-	 * @access public
-	 * @return void
-	 */
-	function __construct() {
-		$this -> loadHelpers(APP_DIR . 'helpers/', __DIR__ . '/helpers/');
-	}
-
 	public function &runTemplate($template, &$data, $name) {
 		ob_start();
 		$object   = new Adapters\Haml\Haml(APP_DIR . 'views/' . $template . '.haml', APP_DIR . 'tmp/views/' . $template . '.php');
-		$object -> run($data);
+		$this -> loadHelpers(APP_DIR . 'helpers/', __DIR__ . '/helpers/');
+		$object -> instance -> display($data, $this);
 		$this -> storage[$name] = ob_get_clean();
 		return $this -> storage[$name];
 	}

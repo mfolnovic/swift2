@@ -18,7 +18,7 @@ class Compiler {
 
 	function __construct(State $tree, $path) {
 		$this -> hash = substr(preg_replace("/[0-9]/", '', md5($path)), 0, 6);
-		$content      = "<?php\nnamespace Application\Templates;\nclass {$this -> hash}{\n\tfunction display(\$data) {\n";
+		$content      = "<?php\nnamespace Application\Templates;\nclass {$this -> hash}{\n\tfunction display(\$data, \$response) {global \$response;\n";
 
 		$content .= $this -> compile($tree, "\t\t");
 
