@@ -1,5 +1,14 @@
+archive:
+  pattern: archive(/:year(/:month))
+  default:
+    controller: archive
+    action: index
+  constraints: 
+    year: /\d{4}/
+    month: /\d{1,2}/
 default:
   pattern: :controller(/:action(/:id))(.:format)
   default:
     controller: foo
     action: bar
+
