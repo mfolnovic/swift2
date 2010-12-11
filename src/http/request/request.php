@@ -46,10 +46,6 @@ class Request {
 	 */
 	public $server;
 	public $controller_data = array();
-	/**
-	 * HTTP Status Code
-	 */
-	private $code = 200;
 
 	/**
 	 * Constructor
@@ -82,27 +78,6 @@ class Request {
 		$router = new Router;
 		$data = $router -> run($this -> getRequestUrl());
 		$this -> get -> knapsack = array_merge($this -> get -> knapsack, $data);
-	}
-
-	/**
-	 * Returns current HTTP Status Code
-	 *
-	 * @access public
-	 * @return int
-	 */
-	public function getStatusCode() {
-		return $this -> code;
-	}
-
-	/**
-	 * Changes HTTP Status Code to $code
-	 *
-	 * @access public
-	 * @param  int $code New HTTP Status Code
-	 * @return void
-	 */
-	public function setStatusCode($code) {
-		$this -> code = (int)$code;
 	}
 
 	/**
