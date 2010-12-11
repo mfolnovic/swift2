@@ -35,9 +35,7 @@ class Knapsack {
 	 * @return void
 	 */
 	function __construct($data = array()) {
-		foreach($data as $index => $value) {
-			$this -> knapsack[strtolower($index)] = $value;
-		}
+		$this -> knapsack = $data;
 	}
 
 	/**
@@ -48,7 +46,7 @@ class Knapsack {
 	 * @return mixed
 	 */
 	function get($index) {
-		return $this -> exists($index) ? $this -> knapsack[$index] : null;
+		return $this -> exists($index) ? $this -> knapsack[strtolower($index)] : null;
 	}
 
 	/**
@@ -94,7 +92,7 @@ class Knapsack {
 	 * @return mixed
 	 */
 	function exists($index) {
-		return isset($this -> knapsack[$index]);
+		return isset($this -> knapsack[strtolower($index)]);
 	}
 
 	/**
