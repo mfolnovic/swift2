@@ -36,16 +36,27 @@ class Haml {
 	 * @return void
 	 */
 	public function __construct($file, $compile) {
-		$content  = file_get_contents($file);
-		$lexer    = new Lexer();
-		$parsed   = $lexer -> parse($content);
-		$compiler = new Compiler($parsed, $compile);
-		$name = "\Application\Templates\\" . $compiler -> hash;
+		$hash = $this -> getHash($file);
+
+		if(filemtime($file) < filemtime($compile)) {
+			include $compile;
+		} else {
+			$content  = file_get_contents($file);
+			$lexer    = new Lexer();
+			$parsed   = $lexer -> parse($content);
+			$compiler = new Compiler($parsed, $compile, $hash);
+		}
+
+		$name = "\Application\Templates\\" . $hash;
 		$this -> instance = new $name;
 	}
 
 	public function run($data, $response) {
 		$this -> instance -> display($data, $response);
+	}
+
+	public function getHash($path) {
+		return substr(preg_replace("/[0-9]/", '', md5($path)), 0, 6);
 	}
 }
 

@@ -14,11 +14,9 @@ namespace Swift\HTTP\Response\Adapters\Haml;
 class Compiler {
 	private $closing  = array('area', 'base', 'br', 'col', 'hr', 'img', 'input', 'link', 'meta', 'param');
 	private $blocks = array('foreach', 'if', 'else', 'for', 'while');
-	public $hash;
 
-	function __construct(State $tree, $path) {
-		$this -> hash = substr(preg_replace("/[0-9]/", '', md5($path)), 0, 6);
-		$content      = "<?php\nnamespace Application\Templates;\nclass {$this -> hash}{\n\tfunction display(\$data, \$response) {global \$response;\n";
+	function __construct(State $tree, $path, $hash) {
+		$content      = "<?php\nnamespace Application\Templates;\nclass $hash{\n\tfunction display(\$data, \$response) {global \$response;\n";
 
 		$content .= $this -> compile($tree, "\t\t");
 
