@@ -14,18 +14,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
 		$this -> assertEquals($request -> post -> sth, 'something');
 	}
 
-	public function testStatusCode() {
-		$request = new Request();
-
-		$this -> assertEquals($request -> getStatusCode(), 200);
-
-		$request -> setStatusCode(404);
-		$this -> assertEquals($request -> getStatusCode(), 404);
-
-		$request -> setStatusCode('500');
-		$this -> assertEquals($request -> getStatusCode(), 500);
-	}
-
 	public function testRequestMethod() {
 		$request = new Request(null, null, null, null, array('REQUEST_METHOD' => 'GET'));
 
