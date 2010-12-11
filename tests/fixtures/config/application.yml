@@ -1,0 +1,16 @@
+database:
+  default:
+    adapter: mysql
+    encoding: utf8
+    hostname: localhost
+    username: root
+    password: 12345
+    database: test
+
+cache:
+  backend:
+    adapter: apc
+
+application:
+  timezone: GMT+1
+  locale: en
