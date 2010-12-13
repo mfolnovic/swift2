@@ -19,18 +19,36 @@ namespace Swift\Cache\Frontend;
  * @subpackage Cache
  */
 class File {
+	/**
+	 * Used for storing caching keys
+	 */
 	var $stack   = array();
+	/**
+	 * Used for storing all caches
+	 */
 	var $storage = array();
 
+	/**
+	 * Starts frontend caching
+	 *
+	 * @access public
+	 * @param  string $key Key
+	 * @return void
+	 */
 	public function start($key) {
 		ob_start();
 
 		$this -> stack[] = $key;
 	}
 
+	/**
+	 * End frontend caching and stores content in the storage
+	 *
+	 * @access public
+	 * @return string
+	 */
 	public function end() {
-		$key                   = array_pop($this -> stack);
-		return $this -> storage[$key] = ob_get_clean();
+		return $this -> storage[array_pop($this -> stack)] = ob_get_clean();
 	}
 }
 

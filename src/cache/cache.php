@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Swift
+ *
+ * @author    Matija Folnovic
+ * @copyright Copyright (c), Matija Folnovic <matijafolnovic@gmail.com>
+ * @license   GPLv3
+ * @package   Swift
+ */
+
 namespace Swift\Cache;
 
 use Swift\Config\Config;
@@ -12,11 +21,27 @@ use Swift\Config\Config;
  * @subpackage Cache
  */
 class Cache {
+	/**
+	 * Instance of Frontend Cache
+	 */
 	static $frontend = NULL;
+	/**
+	 * Instance of Backend Cache (apc, memcache etc.)
+	 */
 	static $backend  = NULL;
+	/**
+	 * Configuration for Cache
+	 */
 	static $config   = NULL;
 
-	static function &getConfig() {
+	/**
+	 * Gets configuration for Cache
+	 *
+	 * @access private
+	 * @static
+	 * @return array
+	 */
+	private static function &getConfig() {
 		if(empty(self::$config)) {
 			self::$config = Config::get('cache');
 		}
@@ -24,7 +49,14 @@ class Cache {
 		return self::$config;
 	}
 
-	static function &getFrontend($config = NULL) {
+	/**
+	 * Gets Frontend instance
+	 *
+	 * @access public
+	 * @static
+	 * @return object
+	 */
+	public static function &getFrontend($config = NULL) {
 		if(!$config) {
 			$config = self::getConfig();
 			$config = isset($config['frontend']) ? $config['frontend'] : array();
@@ -38,7 +70,14 @@ class Cache {
 		return self::$frontend;
 	}
 
-	static function &getBackend($config = NULL) {
+	/**
+	 * Gets Backend instance
+	 *
+	 * @access public
+	 * @static
+	 * @return object
+	 */
+	public static function &getBackend($config = NULL) {
 		if(!$config) {
 			$config = self::getConfig();
 			$config = isset($config['backend']) ? $config['backend'] : array();
@@ -52,6 +91,5 @@ class Cache {
 		return self::$backend;
 	}
 }
-
 
 ?>
