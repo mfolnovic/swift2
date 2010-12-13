@@ -94,7 +94,7 @@ class Base {
 	 * @param  string $layout New layout
 	 * @return void
 	 */
-	public function FunctionName($layout) {
+	public function layout($layout) {
 		$this -> response -> layout = $layout;
 	}
 
