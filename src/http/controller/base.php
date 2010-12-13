@@ -36,8 +36,8 @@ class Base {
 	 * Constructor
 	 *
 	 * @access public
-	 * @param  object $request  Request instance
-	 * @param  object $response Response instance
+	 * @param  Request  $request  Request instance
+	 * @param  Response $response Response instance
 	 * @return return
 	 */
 	function __construct(Request $request, Response $response) {
