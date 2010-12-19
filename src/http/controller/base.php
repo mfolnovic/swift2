@@ -22,7 +22,7 @@ use Swift\HTTP\Response\Response;
  * @subpackage Controller
  */
 
-class Base {
+class Base extends Filters {
 	/**
 	 * Request instance
 	 */
