@@ -24,6 +24,14 @@ class ApcTest extends \PHPUnit_Framework_TestCase {
 		sleep(2);
 		$this -> assertFalse($this -> backend -> exists('bar'));*/
 	}
+
+	public function testDelete() {
+		$this -> backend -> set('deletethis', 'woo');
+		$this -> assertTrue($this -> backend -> exists('deletethis'));
+
+		$this -> backend -> delete('deletethis');
+		$this -> assertFalse($this -> backend -> exists('deletethis'));
+	}
 }
 
 ?>
