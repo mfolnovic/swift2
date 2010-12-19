@@ -29,16 +29,6 @@ class Loader {
 	static $namespaces = array();
 
 	/**
-	 * Constructor
-	 * Registeres autoloader
-	 *
-	 * @access public
-	 * @return void
-	 */
-	function __construct() {
-	}
-
-	/**
 	 * Used for loading classes
 	 *
 	 * @param string $type         Type (src,controller etc.)
