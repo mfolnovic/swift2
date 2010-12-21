@@ -28,6 +28,10 @@ class Response {
 	 * HTTP Status Code
 	 */
 	private $code = 200;
+	/**
+	 * Headers
+	 */
+	private $headers = array();
 
 	/**
 	 * Runs template $template with $data and stores output in storage under $name
@@ -64,8 +68,10 @@ class Response {
 	 *
 	 * @param  array $data Data passed to layout
 	 * @return void
+	 * @todo   Move sendHeaders call to somewhere else
 	 */
 	public function renderLayout(&$data) {
+		$this -> sendHeaders();
 		echo $this -> runTemplate('layouts/' . $this -> layout, $data, 'layout');
 	}
 
@@ -109,6 +115,30 @@ class Response {
 	 */
 	public function setStatusCode($code) {
 		$this -> code = (int)$code;
+	}
+
+	/**
+	 * Send specific header
+	 *
+	 * @access public
+	 * @param  string $name  Name of the header
+	 * @param  string $value Value of the header
+	 * @return void
+	 */
+	public function header($name, $value) {
+		$this -> headers[$name] = $value;
+	}
+
+	/**
+	 * Send all headers
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function sendHeaders() {
+		foreach($this -> headers as $name => $value) {
+			header("$name:$value");
+		}
 	}
 }
 
