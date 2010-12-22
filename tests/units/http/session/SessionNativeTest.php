@@ -2,6 +2,9 @@
 
 use Swift\HTTP\Session\Session;
 
+/**
+ * @runTestsInSeparateProcesses
+ */
 class SessionTest extends \PHPUnit_Framework_TestCase {
 	var $session;
 
