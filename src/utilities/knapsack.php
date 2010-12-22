@@ -35,7 +35,7 @@ class Knapsack {
 	 * @return void
 	 */
 	function __construct($data = array()) {
-		$this -> knapsack = $data;
+		$this -> knapsack = array_change_key_case($data, CASE_LOWER);
 	}
 
 	/**

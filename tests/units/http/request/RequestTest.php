@@ -22,7 +22,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
 		$request = new Request(array('method' => 'put'), null, null, null, array('REQUEST_METHOD' => 'GET'));
 
 		$this -> assertEquals($request -> getMethod(), 'PUT');
-
 	}
 
 	public function testGetUrl() {
