@@ -126,8 +126,7 @@ class Request {
 	 * @return string
 	 */
 	public function getRequestUrl() {
-		$url  = $this -> getUrl();
-		if(empty($url)) return '/';
+		$url  = $this -> getUrl() ?: '/';
 		$self = $this -> server -> script_name;
 		$pos  = 0;
 		$n    = (strpos($url, '?') ?: strlen($url)) - 1;
@@ -136,7 +135,10 @@ class Request {
 			++ $pos;
 		}
 
-		while($url[$n] == '/' && $n > $pos) $n --;
+		while($url[$n] == '/' && $n > $pos) {
+			$n --;
+		}
+
 		return substr($url, $pos, $n - $pos + 1) ?: '/';
 	}
 }
